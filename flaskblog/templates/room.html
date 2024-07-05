@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<form id="message_submit">
+    <label class="coolAnimation makeSmaller" for="message">GlobeChat </label>
+    <textarea class="message" name="message" id="message" cols="50" rows="2"></textarea>
+    <input id="author" type="hidden" name="author" value="{{ current_user.username }}">
+    <button id="new_message_submit" type="submit" value="Send" form="message_submit" class="btn btn-primary">Send</button>
+</form>
+
+
+<div name="chat_window" id="chat_window">
+    {% for chat in chats %}
+    {% if chat.author == current_user.username%}
+    <tr>
+        <td class="text-muted"> {
+            {chat.author}}
+           <div class="card" >
+           <p>{{chat.message}}</p>
+           </div>
+           </td>
+           
+        </tr>
+    {% else %}
+    <tr>
+        <td class="text-muted"> {
+            {chat.author}}
+           <div class="card" >
+           <p>{{chat.message}}</p>
+           </div>
+           </td>
+           
+        </tr>
+    {%endif %}
+    {% endfor %}
+</div>
+
+
+{% endblock content %}

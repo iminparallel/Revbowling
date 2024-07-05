@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div>
+    <p id="usernameForAjax" class="color-grey-9">{{ current_user.username }} </p>
+ {% if room == 'GLOBAL'%}
+    <a class="mr-2" href="{{ url_for('chat.profile', room='GLOBAL', username=current_user.username) }}"><p id="currentroom">{{room}}</p></a>
+    {% else %}
+    {% set list1 = room.split('-') %}  
+    {% if current_user.username == list1[0] %}
+    <p id="currentroom">{{room}}</p>
+    <a class="mr-2" href="{{ url_for('users.user_posts', username=list1[1]) }}"><p id="currentroom">{{list1[1]}}</p></a>
+    {%else%}
+    <p id="currentroom">{{room}}</p>
+    <a class="mr-2" href="{{ url_for('users.user_posts', username=list1[0]) }}"><p id="currentroom">{{list1[0]}}</p></a>
+    {%endif%}
+    {%endif%}  <!--   MESSAGE BOX HERE -->
+
+    <br>
+</div>
+
+ 
+
+<!-- CHAT BOX HERE -->
+
+
+<form id="message_submit">
+    <textarea class="message" name="message" id="message" cols="50" rows="2"></textarea>
+    <input id="author" type="hidden" name="author" value="{{ current_user.username }}">
+    <input id="room" type="hidden" name="room" value="{{ room }}">
+    <br>
+    <button id="new_message_submit" type="submit" value="Send" form="message_submit" class="btn btn-primary">Send</button> 
+   <!--  <input id="new_message_submit" type="button" type="submit" value="Send" form="message_submit" class="btn btn-primary">Submit</input> -->
+</form>
+
+<!--
+<div name="chat_window" id="chat_window">
+    {% for chat in chats %}    
+    <a class="mr-2" href="{{ url_for('users.user_posts', username=chat.author) }}"><small>{{ chat.author }}</small></a>
+    <div class="card" class="make-me-fit">
+    <small class="text-muted" > {{ chat.message }} </small>
+    </div>
+    <br>
+    {% endfor %}
+</div>
+
+ LOGIN PAGE REF -->
+
+    <table>
+       <thead>
+          <tr>
+             <th></th>
+          </tr>
+       </thead>
+       <tbody id="data-output">
+          <!-- Prodcuts from javascript file in here. -->
+       </tbody>
+    </table>
+
+<br>
+<br>
+
+
+{% endblock content %}
+
