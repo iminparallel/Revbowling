@@ -5,6 +5,4 @@ After finishing the tutorial series, which included authentication, and a bloggi
 
 Live chat feature has also been implemented using javascript web sockets.
 
-see requirements.txt for the list of dependencies
-
 Live location:  https://haritchowdhury.pythonanywhere.com/
